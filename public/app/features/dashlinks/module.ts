@@ -49,8 +49,10 @@ function dashLink($compile, $sanitize, linkSrv) {
         var linkInfo = linkSrv.getAnchorInfo(link);
         span.text(linkInfo.title);
         anchor.attr('href', linkInfo.href);
-        sanitizeAnchor();
-
+        if (!link.asDropdown) {
+          sanitizeAnchor();
+        }
+        elem.find('a').attr('data-placement', 'bottom');
         // tooltip
         elem.find('a').tooltip({
           title: $sanitize(scope.link.tooltip),
